@@ -1,6 +1,11 @@
 <html>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
 <style>
+@font-face{
+        font-family: zian;
+        src: url(RoboPixiesNew.ttf);
+}
+
 .grid {
 	display: grid;
 	grid-template-columns: 1fr 3fr 1fr;
@@ -9,7 +14,7 @@
 	height: calc(100vh - 20px);
 }
 h1 {
-	font-size: 40px;
+	font-size: 5vw;
 	text-shadow: 5px 5px 10px rgb(255, 50, 220);
 	-webkit-transition: 1s linear 0s;
 	-moz-transition: 1s linear 0s;
@@ -20,11 +25,11 @@ h1 {
 h3. h4. {
 	color: lawngreen;
 	font-size: 35px;
-	color: black;
 }
 .title {
 	grid-area: 1 / 1 / 2 / 4; // 1st_row, 1st col, 2nd row, 2nd col
 	height: 100vh;
+	font-family: zian;
 	background-image: url("https://images.ecosia.org/IKgpmARW8e4lZ1rbDeaHQ8zps5Q=/0x390/smart/http%3A%2F%2Fwww.electronicproducts.com%2FuploadedImages%2FEducation%2FCareer%2FElectronics.jpg");
 	background-size: cover;
 	color: lawngreen;
@@ -49,6 +54,7 @@ p {
 	text-align: center;
 	padding: 25px;
 }
+
 @media (max-width: @screen-xs) {
     body{font-size: 10px;}
 }
@@ -60,7 +66,12 @@ p {
 <body>
 	<div class="grid" id="flex-container container-fluid">
 		<div class="title">
-			<h1>Arduino: NeoPixel LEDs Tutorial</h1>
+			<div class="row">
+				<div class="col-xs-8"><h1>Arduino: NeoPixel LEDs Tutorial</h1></div>
+				<div class="col-xs-4">
+				<img class="img-responsive" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Arduino_Logo.svg/1280px-Arduino_Logo.svg.png">
+				</div>
+			</div>
 			<h3>By Ramces Gonzalez</h3>
 			<h4>May 29, 2019</h4>
 			<div class="row">
