@@ -39,23 +39,22 @@ p {
 	text-align: left;
 	color: black;
 }
-.main2 {
-	grid-area: 3 / 2 / 4 / 3;
-	height: 160vh;
-}
-.main3 {
-	grid-area: 4 / 2 / 5 / 3;
-	height: 10vh;
-}
 .footer {
 	grid-area: 5 / 1 / 6 / 4;
 	height: 25vh;
 	text-align: center;
 }
-.main1, .main2, .main3, .title, .footer {
+.main1, .title, .footer {
 	background-color: rgb(220, 210, 215);
 	text-align: center;
 	padding: 25px;
+}
+@media (max-width: @screen-xs) {
+    body{font-size: 10px;}
+}
+
+@media (max-width: @screen-sm) {
+    body{font-size: 14px;}
 }
 </style>
 <body>
