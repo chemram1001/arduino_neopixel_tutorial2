@@ -1,0 +1,184 @@
+<html>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
+<style>
+.grid {
+	display: grid;
+	grid-template-columns: 1fr 3fr 1fr;
+	grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+	grid-gap: 20px;
+	height: calc(100vh - 20px);
+}
+h1 {
+	font-size: 40px;
+	text-shadow: 5px 5px 10px rgb(255, 50, 220);
+	-webkit-transition: 1s linear 0s;
+	-moz-transition: 1s linear 0s;
+	-o-transition: 1s linear 0s;
+	transition: 1s linear 0s;
+	outline: 0 none;	
+}
+h3. h4. {
+	color: lawngreen;
+	font-size: 35px;
+	color: black;
+}
+.title {
+	grid-area: 1 / 1 / 2 / 4; // 1st_row, 1st col, 2nd row, 2nd col
+	height: 100vh;
+	background-image: url("https://images.ecosia.org/IKgpmARW8e4lZ1rbDeaHQ8zps5Q=/0x390/smart/http%3A%2F%2Fwww.electronicproducts.com%2FuploadedImages%2FEducation%2FCareer%2FElectronics.jpg");
+	background-size: cover;
+	color: lawngreen;
+}
+p {
+	line-height: 200%;
+	text-align: left;
+	color: black;
+}
+.main1 {
+	grid-area: 2 / 2 / 3 / 3;
+	text-align: left;
+	color: black;
+}
+.main2 {
+	grid-area: 3 / 2 / 4 / 3;
+	height: 160vh;
+}
+.main3 {
+	grid-area: 4 / 2 / 5 / 3;
+	height: 10vh;
+}
+.footer {
+	grid-area: 5 / 1 / 6 / 4;
+	height: 25vh;
+	text-align: center;
+}
+.main1, .main2, .main3, .title, .footer {
+	background-color: rgb(220, 210, 215);
+	text-align: center;
+	padding: 25px;
+}
+</style>
+<body>
+	<div class="grid" id="flex-container container-fluid">
+		<div class="title">
+			<h1>Arduino: NeoPixel LEDs Tutorial</h1>
+			<h3>By Ramces Gonzalez</h3>
+			<h4>May 29, 2019</h4>
+			<div class="row">
+				<div class="col-xs-4"><button class="btn btn-block btn-info">Info</button></div>
+				<div class="col-xs-4"><button class="btn btn-block btn-danger">Back</button></div>
+				<div class="col-xs-4"><button class="btn btn-block btn-primary">Arduino</button></div>
+			</div>
+		</div>
+		<div class="main1">
+			<p>The goal of this tutorial is to introduce you to
+			the neoPixel stick for Arduino. The neoPixel stick usually 
+			comes with 8 LEDs connected in a line. The materials you will
+			need for this tutorial are shown in the list below:</p>
+			<ul>
+				<li>Arduino Uno</li>
+				<li>jumper wires</li>
+				<li>NeoPixel stick (8 LEDs)</li>
+			</ul>
+			<img src="https://i.ebayimg.com/images/g/uXUAAOxyyUtScGfk/s-l500.jpg" width="350" height="350"
+			class="img-responsive" alt="image of neopixel stick">
+			<p>Once you have the materials, you need to download the library called
+			Adafruit_NeoPixel which is found in 
+			<a href="https://github.com/adafruit/Adafruit_NeoPixel">GitHub (Adafruit_NeoPixel Library)</a>.</p>
+			<p>Since the neopixel stick does not have any wires, you will have to solder some wires to the 
+			connections shown in the image above. You can take some male-male wires and solder one end of one 
+			to GND, VCC, and VIN, in the neoPixel stick. (Note: the other GND does not need to be soldered)</p>
+			<p>The setup is very easy for this tutorial: simply make the following connections
+			with jumper wires:</p>
+			<ul>
+				<li>Arduino ==========> NeoPixel Stick</li>
+				<li>Pin 13  ==========> VIN</li>
+				<li>5V      ==========> VCC</li>
+				<li>GND     ==========> GND</li>
+			</ul>
+			<section>The Code</section>
+			<p>Now the fun part, the code, in order to test your setup, you can upload the following code
+			to your Arduino and observe the LEDs light up.</p>
+			<textarea style="height: 450px; width: 450px;">
+#include <Adafruit_NeoPixel.h>
+#ifdef __AVR__
+#include <avr/power.h>
+#endif
+
+// Which pin on the Arduino is connected to the NeoPixels?
+// On a Trinket or Gemma we suggest changing this to 1
+#define PIN            13
+
+// How many NeoPixels are attached to the Arduino?
+#define NUMPIXELS      8
+
+// When we setup the NeoPixel library, we tell it how many pixels, and which pin to use to send signals.
+// Note that for older NeoPixel strips you might need to change the third parameter--see the strandtest
+// example for more information on possible values.
+Adafruit_NeoPixel pixels = Adafruit_NeoPixel(NUMPIXELS, PIN, NEO_GRB + NEO_KHZ800);
+
+int delayval = 250; // delay for half a second
+
+void setup() {
+  // This is for Trinket 5V 16MHz, you can remove these three lines if you are not using a Trinket
+#if defined (__AVR_ATtiny85__)
+  if (F_CPU == 16000000) clock_prescale_set(clock_div_1);
+#endif
+  // End of trinket special code
+
+  pixels.begin(); // This initializes the NeoPixel library.
+}
+
+void loop() {
+
+  // For a set of NeoPixels the first NeoPixel is 0, second is 1, all the way up to the count of pixels minus one.
+
+  for(int i=0;i<NUMPIXELS;i++){
+    if( i%2 ==0){
+      // pixels.Color takes RGB values, from 0,0,0 up to 255,255,255
+      pixels.setPixelColor(i, pixels.Color(0,150,0)); // Moderately bright green color.
+
+      pixels.show(); // This sends the updated pixel color to the hardware.
+
+      delay(delayval); // Delay for a period of time (in milliseconds).
+    } else if( i%2 == 1){
+      pixels.setPixelColor(i, pixels.Color(0,0,170));
+      pixels.show();
+      delay(delayval);
+    }
+  }
+  for(int j=0; j<NUMPIXELS; j++){
+    pixels.setPixelColor(j, pixels.Color(0,0,0));
+    pixels.show();
+    delay(delayval);
+  }
+} 
+</textarea>
+			<p>Note, in this code, Pin is set to 13 which is the pin that will send commands to 
+			the neoPixel stick. Also, in the loop() function, note that there are 2 for loops,
+			the first one loops through the first to last LED (pixel), since there are 8 pixels
+			in a single neoPixel stick, the for loop runs from the first pixel which is pixel 0, 
+			all the way to the last pixel which is pixel 7, that is why the terminating statment
+			is at 'i < NUMPIXELS'. This first for loop will turn each pixel in the array into a 
+			medium green color which is given by 'rgb(0,150,0)'. Also, within this loop there is 
+			an if-else statement which makes an alterating green-blue color pattern by assinging
+			odd pixels blue and even pixels green. Next, the second for loop turns off the pixels 
+			from the end of the array to the beginning by setting pixels.Color(0,0,0).</p>
+			<p>Once you upload and verify that the setup and the code works, make sure to modify
+			play around with the code in order to become more familiar with the neoPixel stick.
+			Also, you can read more about the Adafruit_NeoPixel library from the GitHub page.</p>
+			<a href="https://create.arduino.cc/projecthub/glowascii/neopixel-leds-arduino-basics-126d1a">Reference from this tutorial</a><br>
+			<a href="https://www.sparkfun.com/products/12661">Where to buy Arduino neoPixel</a>
+		</div>
+		<div class="footer">
+			<p>If you have any questions or need help, please feel free to leave a comment</p>
+			<form action="/html/tags/html_form_tag_action.cfm" method="post">
+			<div>
+				<textarea name="comments" id="comments" style="font-family:sans-serif;font-size:1.2em;">Hey... say something!</textarea>
+			</div>
+			<input type="submit" value="Submit">
+			</form>
+		</div>
+	</div>
+</body>
+</html>
